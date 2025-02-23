@@ -13,12 +13,20 @@
     <groupId>es.slzvieira.study</groupId>
     <artifactId>slzvieira-news</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>SLZ Vieira News</name>
 
     <properties>
         <java.version>17</java.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/slzvieira/slzvieira-news</url>
+        </repository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
