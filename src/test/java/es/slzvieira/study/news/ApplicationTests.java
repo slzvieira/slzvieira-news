@@ -1,13 +1,13 @@
-package es.slzvieira.study.slzvieira_news;
+package es.slzvieira.study.news;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SlzVieiraNewsApplicationTests {
+class ApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }
