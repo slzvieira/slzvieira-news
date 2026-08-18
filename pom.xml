@@ -54,10 +54,39 @@
 	</dependencies>
 
 	<build>
+		<finalName>app</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.4</version>
+				<configuration>
+					<containerizingMode>packaged</containerizingMode>
+					<from>
+						<image>eclipse-temurin:21-jre</image>
+					</from>
+					<to>
+						<image>slzvieira-news</image>
+						<tags>
+							<tag>${project.version}</tag>
+						</tags>
+					</to>
+					<container>
+						<entrypoint>
+							<arg>java</arg>
+							<arg>-jar</arg>
+							<arg>/app/app.jar</arg>
+						</entrypoint>
+						<ports>
+							<port>8080</port>
+						</ports>
+					</container>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
