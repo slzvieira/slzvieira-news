@@ -1,7 +1,11 @@
 package com.slzvieira.news.repository;
 
 import com.slzvieira.news.model.News;
+import com.slzvieira.news.model.NewsCategory;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.io.BufferedReader;
@@ -12,6 +16,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class NewsRepository {
@@ -31,6 +36,21 @@ public class NewsRepository {
 
     public News findByIndex(int index) {
         return newsList.get(index);
+    }
+
+    public Page<News> findAll(Pageable pageable) {
+        int fromIndex = (int) pageable.getOffset();
+        if (fromIndex >= newsList.size()) {
+            return new PageImpl<>(List.of(), pageable, newsList.size());
+        }
+        int toIndex = Math.min(fromIndex + pageable.getPageSize(), newsList.size());
+        return new PageImpl<>(newsList.subList(fromIndex, toIndex), pageable, newsList.size());
+    }
+
+    public Optional<News> findById(int id) {
+        return newsList.stream()
+                .filter(news -> news.getId() == id)
+                .findFirst();
     }
 
     private List<News> loadNews() {
@@ -76,7 +96,7 @@ public class NewsRepository {
     private News parseNews(int id, List<String> block) {
         String title = block.get(0);
         String content = block.get(1);
-        String category = block.get(2);
+        NewsCategory category = NewsCategory.fromString(block.get(2));
         LocalDate date = LocalDate.parse(block.get(3), DATE_FORMATTER);
 
         return News.builder()

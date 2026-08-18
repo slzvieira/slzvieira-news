@@ -16,6 +16,6 @@ public class News {
     private int id;
     private String title;
     private String content;
-    private String category;
+    private NewsCategory category;
     private LocalDate date;
 }
