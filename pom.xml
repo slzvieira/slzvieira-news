@@ -76,7 +76,7 @@
 						</tags>
 					</to>
 					<container>
-						<mainClass>com.slzvieira.news.NewsApplication</mainClass>
+						<mainClass>com.slzvieira.news.Application</mainClass>
 						<ports>
 							<port>8080</port>
 						</ports>
