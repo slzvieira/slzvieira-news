@@ -66,7 +66,6 @@
 				<artifactId>jib-maven-plugin</artifactId>
 				<version>3.4.4</version>
 				<configuration>
-					<containerizingMode>packaged</containerizingMode>
 					<from>
 						<image>eclipse-temurin:21-jre</image>
 					</from>
@@ -77,11 +76,7 @@
 						</tags>
 					</to>
 					<container>
-						<entrypoint>
-							<arg>java</arg>
-							<arg>-jar</arg>
-							<arg>/app/app.jar</arg>
-						</entrypoint>
+						<mainClass>com.slzvieira.news.Application</mainClass>
 						<ports>
 							<port>8080</port>
 						</ports>
